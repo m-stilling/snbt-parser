@@ -1,7 +1,6 @@
 {
 	"$schema": "https://getcomposer.org/schema.json",
 	"name": "stilling/snbt-parser",
-	"type": "project",
 	"description": "Turn Minecraft SNBT data into the corresponding PHP data types.",
 	"keywords": ["minecraft", "snbt", "nbt"],
 	"license": "MIT",
