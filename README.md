@@ -9,7 +9,7 @@ composer require stilling/snbt-parser
 ```
 
 > [!NOTE]
-> Technically, this package transposes the SNBT data to JSON and parses that using `json_decode()`, which may not be too performant. A potential v2 will parse SNBT directly.
+> Technically, this package transposes the SNBT data to JSON and parses that using `json_decode()`, which may not be too performant. A potential v2 may parse SNBT directly.
 
 Here's an example parsing the SNBT data of a chest using the following command: `data get block -40 73 -11`
 
