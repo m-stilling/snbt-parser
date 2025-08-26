@@ -3,75 +3,75 @@
 use Stilling\SNBTParser\SNBTParser;
 
 test("boolean", function () {
-	expect(new SNBTParser()->parse("true"))->toEqual(true)
-		->and(new SNBTParser()->parse("false"))->toEqual(false);
+	expect((new SNBTParser())->parse("true"))->toEqual(true)
+		->and((new SNBTParser())->parse("false"))->toEqual(false);
 });
 
 test("byte", function () {
 	foreach ([ 0, 42, 127, -5, -128 ] as $number) {
-		expect(new SNBTParser()->parse("{$number}b"))->toEqual($number)
-			->and(new SNBTParser()->parse("{$number}B"))->toEqual($number);
+		expect((new SNBTParser())->parse("{$number}b"))->toEqual($number)
+			->and((new SNBTParser())->parse("{$number}B"))->toEqual($number);
 	}
 });
 
 test("short", function () {
 	foreach ([ 0, 42, 32_767, -5, -32_768 ] as $number) {
-		expect(new SNBTParser()->parse("{$number}s"))->toEqual($number)
-			->and(new SNBTParser()->parse("{$number}S"))->toEqual($number);
+		expect((new SNBTParser())->parse("{$number}s"))->toEqual($number)
+			->and((new SNBTParser())->parse("{$number}S"))->toEqual($number);
 	}
 });
 
 test("int", function () {
 	foreach ([ 0, 42, 2_147_483_647, -5, -2_147_483_648 ] as $number) {
-		expect(new SNBTParser()->parse("{$number}i"))->toEqual($number)
-			->and(new SNBTParser()->parse("{$number}I"))->toEqual($number)
-			->and(new SNBTParser()->parse("$number"))->toEqual($number);
+		expect((new SNBTParser())->parse("{$number}i"))->toEqual($number)
+			->and((new SNBTParser())->parse("{$number}I"))->toEqual($number)
+			->and((new SNBTParser())->parse("$number"))->toEqual($number);
 	}
 });
 
 test("long", function () {
-	expect(new SNBTParser()->parse("9223372036854775807l"))->toEqual(9_223_372_036_854_775_807)
-		->and(new SNBTParser()->parse("9223372036854775807L"))->toEqual(9_223_372_036_854_775_807)
-		->and(new SNBTParser()->parse("-9223372036854775808l"))->toEqual(-9_223_372_036_854_775_808)
-		->and(new SNBTParser()->parse("-9223372036854775808L"))->toEqual(-9_223_372_036_854_775_808);
+	expect((new SNBTParser())->parse("9223372036854775807l"))->toEqual(9_223_372_036_854_775_807)
+		->and((new SNBTParser())->parse("9223372036854775807L"))->toEqual(9_223_372_036_854_775_807)
+		->and((new SNBTParser())->parse("-9223372036854775808l"))->toEqual(-9_223_372_036_854_775_808)
+		->and((new SNBTParser())->parse("-9223372036854775808L"))->toEqual(-9_223_372_036_854_775_808);
 
 	foreach ([ 0, 42, -5 ] as $number) {
-		expect(new SNBTParser()->parse($number . "l"))->toEqual($number)
-			->and(new SNBTParser()->parse($number . "L"))->toEqual($number);
+		expect((new SNBTParser())->parse($number . "l"))->toEqual($number)
+			->and((new SNBTParser())->parse($number . "L"))->toEqual($number);
 	}
 });
 
 test("float", function () {
 	foreach ([0.0, 3.4, -3.4, 123.456, -987.654] as $number) {
-		expect(new SNBTParser()->parse($number . "f"))->toEqual($number)
-			->and(new SNBTParser()->parse($number . "F"))->toEqual($number);
+		expect((new SNBTParser())->parse($number . "f"))->toEqual($number)
+			->and((new SNBTParser())->parse($number . "F"))->toEqual($number);
 	}
 });
 
 test("double", function () {
 	foreach ([0.0, 1.79, -1.79, 123456.789, -987654.321] as $number) {
-		expect(new SNBTParser()->parse($number . "d"))->toEqual($number)
-			->and(new SNBTParser()->parse($number . "D"))->toEqual($number)
-			->and(new SNBTParser()->parse($number))->toEqual($number);
+		expect((new SNBTParser())->parse($number . "d"))->toEqual($number)
+			->and((new SNBTParser())->parse($number . "D"))->toEqual($number)
+			->and((new SNBTParser())->parse($number))->toEqual($number);
 	}
 });
 
 test("string", function () {
-	expect(new SNBTParser()->parse("'single'"))->toEqual("single")
-		->and(new SNBTParser()->parse('"double"'))->toEqual("double");
+	expect((new SNBTParser())->parse("'single'"))->toEqual("single")
+		->and((new SNBTParser())->parse('"double"'))->toEqual("double");
 });
 
 test("list", function () {
-	expect(new SNBTParser()->parse("[]"))->toEqual([]);
+	expect((new SNBTParser())->parse("[]"))->toEqual([]);
 });
 
 test("list with compound", function () {
-	expect(new SNBTParser()->parse("[ { test: true } ]"))->toEqual([ [ "test" => true ] ]);
+	expect((new SNBTParser())->parse("[ { test: true } ]"))->toEqual([ [ "test" => true ] ]);
 });
 
 test("compound", function () {
-	expect(new SNBTParser()->parse("{ test: 1 }"))->toEqual(["test" => 1])
-		->and(new SNBTParser()->parse('{ "test": 1 }'))->toEqual(["test" => 1]);
+	expect((new SNBTParser())->parse("{ test: 1 }"))->toEqual(["test" => 1])
+		->and((new SNBTParser())->parse('{ "test": 1 }'))->toEqual(["test" => 1]);
 });
 
 test("large compound", function () {
@@ -80,7 +80,7 @@ test("large compound", function () {
 	SNBT;
 
 
-	expect(new SNBTParser()->parse($snbt))->toEqual([
+	expect((new SNBTParser())->parse($snbt))->toEqual([
 		"seenCredits" => 0,
 		"DeathTime" => 0,
 		"foodTickTimer" => 0,
@@ -180,15 +180,15 @@ test("large compound", function () {
 });
 
 test("byte array", function () {
-	expect(new SNBTParser()->parse("[B;1b,2b,3b]"))->toEqual([ 1, 2, 3 ]);
+	expect((new SNBTParser())->parse("[B;1b,2b,3b]"))->toEqual([ 1, 2, 3 ]);
 });
 
 test("int array", function () {
-	expect(new SNBTParser()->parse("[I;1,2,3]"))->toEqual([1, 2, 3])
-		->and(new SNBTParser()->parse("[I;1b,2s,3i] "))->toEqual([1, 2, 3]);
+	expect((new SNBTParser())->parse("[I;1,2,3]"))->toEqual([1, 2, 3])
+		->and((new SNBTParser())->parse("[I;1b,2s,3i] "))->toEqual([1, 2, 3]);
 });
 
 test("long array", function () {
-	expect(new SNBTParser()->parse("[L;1l,2l,3l]"))->toEqual([1, 2, 3])
-		->and(new SNBTParser()->parse("[L;1b,2s,3i,4l] "))->toEqual([1, 2, 3, 4]);
+	expect((new SNBTParser())->parse("[L;1l,2l,3l]"))->toEqual([1, 2, 3])
+		->and((new SNBTParser())->parse("[L;1b,2s,3i,4l] "))->toEqual([1, 2, 3, 4]);
 });
