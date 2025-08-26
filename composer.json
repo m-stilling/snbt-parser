@@ -1,0 +1,35 @@
+{
+	"$schema": "https://getcomposer.org/schema.json",
+	"name": "stilling/snbt-parser",
+	"type": "project",
+	"description": "Turn Minecraft SNBT data into the corresponding PHP data types.",
+	"keywords": ["minecraft", "snbt", "nbt"],
+	"license": "MIT",
+	"require": {
+		"php": "^8.4",
+		"ext-mbstring": "*"
+	},
+	"require-dev": {
+		"pestphp/pest": "^v4.0.3"
+	},
+	"autoload": {
+		"psr-4": {
+			"Stilling\\SNBTParser\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\": "tests/"
+		}
+	},
+	"scripts": {
+		"test": "pest"
+	},
+	"config": {
+		"allow-plugins": {
+			"pestphp/pest-plugin": true
+		}
+	},
+	"minimum-stability": "stable",
+	"prefer-stable": true
+}
