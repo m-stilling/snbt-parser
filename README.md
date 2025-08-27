@@ -16,7 +16,7 @@ Here's an example parsing the SNBT data of a chest using the following command: 
 ```php
 use Stilling\SNBTParser\SNBTParser;
 
-(new SNBTParser())->parse('{z: -11, x: -40, id: "minecraft:chest", y: 73, Items: [{count: 1, Slot: 0b, id: "minecraft:golden_horse_armor"}, {count: 1, Slot: 1b, id: "minecraft:saddle"}, {count: 1, Slot: 2b, components: {"minecraft:repair_cost": 1, "minecraft:enchantments": {"minecraft:luck_of_the_sea": 2, "minecraft:lure": 2, "minecraft:unbreaking": 3}, "minecraft:damage": 10}, id: "minecraft:fishing_rod"}, {count: 1, Slot: 3b, id: "minecraft:shield"}]}')
+SNBTParser::parse('{z: -11, x: -40, id: "minecraft:chest", y: 73, Items: [{count: 1, Slot: 0b, id: "minecraft:golden_horse_armor"}, {count: 1, Slot: 1b, id: "minecraft:saddle"}, {count: 1, Slot: 2b, components: {"minecraft:repair_cost": 1, "minecraft:enchantments": {"minecraft:luck_of_the_sea": 2, "minecraft:lure": 2, "minecraft:unbreaking": 3}, "minecraft:damage": 10}, id: "minecraft:fishing_rod"}, {count: 1, Slot: 3b, id: "minecraft:shield"}]}')
 
 // returns ->
 

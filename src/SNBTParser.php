@@ -6,21 +6,23 @@ use Stilling\SNBTParser\Tokens\InitialToken;
 use Stilling\SNBTParser\Tokens\Token;
 
 class SNBTParser {
-	/** @var Token[] */
-	protected array $tokens = [];
+	public static function parse(string $input): array|float|int|string|object|bool {
+		$tokens = static::readTokens(mb_trim($input));
 
-	public function parse(string $input): array|float|int|string|object {
-		$this->tokens = [];
-		$this->readToken(mb_trim($input));
-
-		return $this->jsonParseTokens($this->tokens);
+		return static::jsonParseTokens($tokens);
 	}
 
-	protected function readToken(string $token): void {
-		if (count($this->tokens) === 0) {
+	/**
+	 * @param string $token
+	 * @param Token[] $tokens
+	 * @return Token[]
+	 * @throws \Exception
+	 */
+	protected static function readTokens(string $token, array $tokens = []): array {
+		if (count($tokens) === 0) {
 			$currentToken = new InitialToken();
 		} else {
-			$currentToken = end($this->tokens);
+			$currentToken = end($tokens);
 		}
 
 		[ $nextToken, $remaining ] = $currentToken->parseNextToken($token);
@@ -34,14 +36,21 @@ class SNBTParser {
 			throw new \Exception("Invalid parseNextToken result");
 		}
 
-		$this->tokens[] = $nextToken;
+		$tokens[] = $nextToken;
 
 		if (mb_strlen($remaining) > 0) {
-			$this->readToken($remaining);
+			return static::readTokens($remaining, $tokens);
 		}
+
+		return $tokens;
 	}
 
-	protected function jsonParseTokens(array $tokens): array|float|int|string|object {
+	/**
+	 * @param Token[] $tokens
+	 * @return array|float|int|string|object|bool
+	 * @throws \Exception
+	 */
+	protected static function jsonParseTokens(array $tokens): array|float|int|string|object|bool {
 		$json = "";
 
 		foreach ($tokens as $token) {
