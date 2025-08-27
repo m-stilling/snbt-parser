@@ -12,6 +12,29 @@ class SNBTParser {
 		return static::jsonParseTokens($tokens);
 	}
 
+	public static function intsToUuid(array $ints): string {
+		if (count($ints) !== 4) {
+			throw new \InvalidArgumentException("Array must contain exactly 4 integers.");
+		}
+
+		foreach ($ints as $i) {
+			if (!is_int($i)) {
+				throw new \InvalidArgumentException("All elements must be integers.");
+			}
+		}
+
+		$bytes = pack("NNNN", $ints[0], $ints[1], $ints[2], $ints[3]);
+		$hex = bin2hex($bytes);
+
+		return implode("-", [
+			substr($hex, 0, 8),
+			substr($hex, 8, 4),
+			substr($hex, 12, 4),
+			substr($hex, 16, 4),
+			substr($hex, 20, 12),
+		]);
+	}
+
 	/**
 	 * @param string $token
 	 * @param Token[] $tokens
