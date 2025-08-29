@@ -1,6 +1,6 @@
 # SNBT Parser
 
-[![tests](https://github.com/m-stilling/snbt-parser/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/m-stilling/snbt-parser/actions/workflows/tests.yml)
+[![tests](https://github.com/m-stilling/snbt-parser-php/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/m-stilling/snbt-parser-php/actions/workflows/tests.yml)
 
 Turn [Minecraft SNBT](https://minecraft.wiki/w/NBT_format#SNBT_format) data into the corresponding PHP data types. 
 
